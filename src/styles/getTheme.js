@@ -18,13 +18,13 @@ function darkenOrLighten(color, ratio = 0.15) {
     return c.luminosity() > 0.5 ? c.darken(ratio) : c.lighten(ratio);
 }
 
-export default function getTheme(theme, ...more) {
-    theme = merge(lightTheme, theme, ...more);
+export default function getTheme(theme, customTheme) {
+    theme = merge(lightTheme, theme);
 
     const { spacing, fontFamily, typography, palette } = theme;
     const baseTheme = { spacing, fontFamily, typography, palette };
 
-    theme = merge({
+    theme = merge(customTheme, {
         actionButton: StyleSheet.create(merge({
             positionContainer: {
                 position: 'absolute',
@@ -224,7 +224,6 @@ export default function getTheme(theme, ...more) {
                 paddingBottom: 20,
             },
             titleText: {
-                fontFamily,
                 fontSize: 20,
                 fontWeight: 'bold',
                 color: 'black',
@@ -446,7 +445,6 @@ export default function getTheme(theme, ...more) {
                 marginLeft: 20,
             },
             titleText: {
-                fontFamily,
                 color: palette.alternateTextColor,
                 ...typography.appBar,
             },
@@ -466,7 +464,6 @@ export default function getTheme(theme, ...more) {
             },
             centerElementContainer: { },
             titleText: {
-                fontFamily,
                 flex: 1,
                 marginLeft: 16,
                 color: palette.primaryTextColor,
