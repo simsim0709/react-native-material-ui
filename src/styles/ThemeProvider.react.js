@@ -6,7 +6,9 @@ import getTheme from './getTheme';
 const propTypes = {
     children: PropTypes.element,
     uiTheme: PropTypes.object,
+    customTheme: PropTypes.object,
 };
+
 const childContextTypes = {
     uiTheme: PropTypes.object.isRequired,
 };
@@ -14,7 +16,7 @@ const childContextTypes = {
 class ThemeProvider extends Component {
     getChildContext() {
         return {
-            uiTheme: getTheme(this.props.uiTheme),
+            uiTheme: getTheme(this.props.uiTheme, this.props.customTheme),
         };
     }
 
